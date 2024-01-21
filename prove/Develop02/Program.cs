@@ -12,7 +12,7 @@ class Program
         Console.WriteLine("2. Display");
         Console.WriteLine("3. Load");
         Console.WriteLine("4. Save");
-        Console.WriteLine("5.Quit");
+        Console.WriteLine("5. Quit");
         Console.WriteLine("What Would you Like to do? ");
         string choice = Console.ReadLine();
         while (true)
