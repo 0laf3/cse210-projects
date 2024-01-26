@@ -1,3 +1,4 @@
+using System.Text;
 class Scripture
 {
     private List<Word> words;

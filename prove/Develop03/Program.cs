@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 class Program
 {
     static void Main()
@@ -18,7 +17,9 @@ class Program
         
         Console.WriteLine("\nIs Completely Hidden: " + scripture.IsCompletelyHidden());
         
+        Reference reference = new Reference("Genesis 1:1");
+        Console.WriteLine("\nReference Display Text: " + reference.GetDisplayText());
+        
         Console.ReadKey();
     }
 }
-
