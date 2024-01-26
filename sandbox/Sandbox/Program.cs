@@ -1,27 +1,39 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
-
 class Program
 {
     static void Main()
     {
-        var scripture = new Scripture("In the beginning, God created the heavens and the earth.");
+        Reference reference = new Reference("Genesis 1:1");
+        Scripture scripture = new Scripture("In the beginning, God created the heavens and the earth.");
 
-        Console.WriteLine("Original Text:");
-        Console.WriteLine(scripture.GetDisplayText());
+        DisplayText("Original Text:", reference, scripture);
 
-        scripture.HideRandomWords(3);
+        for (int i = 1; i <= 9; i++)
+        {
+            scripture.HideRandomWords(3);
+            DisplayHiddenText(scripture, reference, i);
+        }
 
-        Console.WriteLine("\nText with Random Words Hidden:");
-        Console.WriteLine(scripture.GetDisplayText());
-
-        Console.WriteLine("\nIs Completely Hidden: " + scripture.IsCompletelyHidden());
-
-        var reference = new Reference("Genesis 1:1");
-        Console.WriteLine("\nReference Display Text: " + reference.GetDisplayText());
-
+        Console.WriteLine("\nPress Enter to continue or type 'quit' to finish");
         Console.ReadKey();
+    }
+
+    static void DisplayHiddenText(Scripture scripture, Reference reference, int iteration)
+    {
+        Console.WriteLine($"\nText with Random Words {iteration} Hidden:");
+        DisplayText(reference, scripture);
+    }
+
+    static void DisplayText(string message, Reference reference, Scripture scripture)
+    {
+        Console.WriteLine(message);
+        Console.WriteLine($"{reference.GetDisplayText()} {scripture.GetDisplayText()}");
+    }
+
+    static void DisplayText(Reference reference, Scripture scripture)
+    {
+        DisplayText(string.Empty, reference, scripture);
     }
 }
 
@@ -53,11 +65,6 @@ class Scripture
             displayText.Append(' ');
         }
         return displayText.ToString().Trim();
-    }
-
-    public bool IsCompletelyHidden()
-    {
-        return words.All(word => word.IsHidden());
     }
 }
 
