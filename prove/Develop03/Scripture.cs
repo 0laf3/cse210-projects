@@ -39,6 +39,8 @@ public class Scripture
 
     public string GetDisplayText()
     {
+        string banner = $"Welcome to the scripture memorizer. Press ENTER to continue or enter 'quit' to stop.\n";
+        Console.WriteLine(banner);
         string text = string.Join(" ", _words.Select(word => word.GetDisplayText()));
         string scripture = $"{_reference.GetDisplayText()}{" "}{text}";
         Console.WriteLine(scripture);

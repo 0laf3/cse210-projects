@@ -19,7 +19,7 @@ class Program
         Reference reference = new Reference(randomScriptureData.BookName, randomScriptureData.ChapterNumber, randomScriptureData.StartVerse, randomScriptureData.EndVerse);
         Scripture scripture = new Scripture(reference, randomScriptureData.Text);
 
-        string banner = $"Welcome to the scripture memorizer. Press ENTER twice to continue or enter 'quit' to stop.";
+        string banner = $"Welcome to the scripture memorizer. Press ENTER to continue or enter 'quit' to stop.\n";
         Console.WriteLine(banner);
 
         if (Console.ReadLine().ToLower() == "quit")
@@ -48,7 +48,7 @@ class Program
 
                     if (scripture.IsCompletelyHidden())
                     {
-                        return;
+                        play = false;
                     }
                 }
 
