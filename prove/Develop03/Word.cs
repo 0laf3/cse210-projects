@@ -1,31 +1,36 @@
-class Word
+public class Word
 {
-    private string text;
-    private bool hidden;
+    private string _text;
+    private string _initText;
 
     public Word(string text)
     {
-        this.text = text;
-        hidden = false;
+        _initText = text;
+        Reset();
     }
 
     public void Hide()
     {
-        hidden = true;
+        _text = new string('_', _text.Length);
     }
 
     public void Show()
     {
-        hidden = false;
+        Reset();
     }
 
     public bool IsHidden()
     {
-        return hidden;
+        return _text.StartsWith("_");
     }
 
     public string GetDisplayText()
     {
-        return hidden ? "_____" : text;
+        return _text;
+    }
+
+    private void Reset()
+    {
+        _text = _initText;
     }
 }

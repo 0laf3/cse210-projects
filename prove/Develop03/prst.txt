@@ -1,23 +1,17 @@
+// Added logic to only hide a word that isn't already hidden.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Net.Quic;
 using System.Text.Json;
+using System;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Load JSON data from a file
-        string jsonFilePath = "scriptures.json";
-        List<ScriptureData> scripturesData = LoadScripturesData(jsonFilePath);
-
-        // Randomly choose a scripture
-        Random random = new Random();
-        ScriptureData randomScriptureData = scripturesData[random.Next(scripturesData.Count)];
-
-        Reference reference = new Reference(randomScriptureData.BookName, randomScriptureData.ChapterNumber, randomScriptureData.StartVerse, randomScriptureData.EndVerse);
-        Scripture scripture = new Scripture(reference, randomScriptureData.Text);
+        Reference reference = new Reference("Moses", 1, 39,"");
+        Scripture scripture = new Scripture(reference, " For behold, this is my work and my glory\u2014to bring to pass the immortality and eternal life of man.");
 
         string banner = $"Welcome to the scripture memorizer. Press ENTER twice to continue or enter 'quit' to stop.";
         Console.WriteLine(banner);
@@ -57,17 +51,4 @@ class Program
             Console.WriteLine("Have a great day.");
         }
     }
-
-    static List<ScriptureData> LoadScripturesData(string jsonFilePath)
-    {
-        // Read JSON data from file
-        string jsonContent = File.ReadAllText(jsonFilePath);
-
-        // Deserialize JSON into a list of ScriptureData objects
-        List<ScriptureData> scripturesData = JsonSerializer.Deserialize<List<ScriptureData>>(jsonContent);
-
-        return scripturesData;
-    }
 }
-
-

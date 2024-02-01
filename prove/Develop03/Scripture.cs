@@ -1,43 +1,53 @@
-using System.Text;
-class Scripture
+public class Scripture
 {
-    private List<Word> words;
+    private Reference _reference;
+    private List<Word> _words = new List<Word>();
 
-    public Scripture(string text)
+    public Scripture(Reference reference, string text)
     {
-        words = new List<Word>();
-        string[] wordArray = text.Split(' ');
+        _reference = reference;
+        InitializeWords(text);
+    }
 
-        foreach (string wordText in wordArray)
-        {
-            Word word = new Word(wordText);
-            words.Add(word);
-        }
+    private void InitializeWords(string text)
+    {
+        string[] split = text.Split(" ");
+        _words.AddRange(split.Select(word => new Word(word)));
     }
 
     public void HideRandomWords(int numberToHide)
     {
+        if (IsCompletelyHidden())
+        {
+            return;
+        }
+
         Random random = new Random();
+
         for (int i = 0; i < numberToHide; i++)
         {
-            int index = random.Next(words.Count);
-            words[index].Hide();
+            int indx;
+
+            do
+            {
+                indx = random.Next(_words.Count);
+            } while (_words[indx].IsHidden());
+
+            _words[indx].Hide();
         }
     }
 
     public string GetDisplayText()
     {
-        StringBuilder displayText = new StringBuilder();
-        foreach (Word word in words)
-        {
-            displayText.Append(word.GetDisplayText());
-            displayText.Append(' ');
-        }
-        return displayText.ToString().Trim();
+        string text = string.Join(" ", _words.Select(word => word.GetDisplayText()));
+        string scripture = $"{_reference.GetDisplayText()}{" "}{text}";
+        Console.WriteLine(scripture);
+
+        return scripture;
     }
 
     public bool IsCompletelyHidden()
     {
-        return words.All(word => word.IsHidden());
+        return _words.All(word => word.IsHidden());
     }
 }

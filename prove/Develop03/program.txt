@@ -1,0 +1,149 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Load JSON data from a file
+        string jsonFilePath = "scriptures.json";
+        List<ScriptureData> scripturesData = LoadScripturesData(jsonFilePath);
+
+        // Randomly choose a scripture
+        Random random = new Random();
+        ScriptureData randomScriptureData = ChooseRandomScripture(scripturesData, random);
+
+        Reference reference = new Reference(randomScriptureData.BookName, randomScriptureData.ChapterNumber, randomScriptureData.StartVerse, randomScriptureData.EndVerse);
+        Scripture scripture = new Scripture(reference, randomScriptureData.Text);
+
+        DisplayWelcomeBanner();
+
+        bool play = true;
+
+        do
+        {
+            Console.Clear();
+            scripture.GetDisplayText();
+            string userInput = Console.ReadLine().ToLower();
+
+            if (userInput == "quit")
+            {
+                play = false;
+            }
+            else
+            {
+                Console.Clear();
+                scripture.HideRandomWords(1);
+                scripture.GetDisplayText();
+
+                if (scripture.IsCompletelyHidden())
+                {
+                    return;
+                }
+            }
+
+        } while (play);
+
+        Console.WriteLine();
+        Console.WriteLine("Have a great day.");
+    }
+
+    static void DisplayWelcomeBanner()
+    {
+        Console.WriteLine("Welcome to the scripture memorizer. Press ENTER twice to continue or enter 'quit' to stop.");
+    }
+
+    static ScriptureData ChooseRandomScripture(List<ScriptureData> scripturesData, Random random)
+    {
+        return scripturesData[random.Next(scripturesData.Count)];
+    }
+
+    static List<ScriptureData> LoadScripturesData(string jsonFilePath)
+    {
+        // Read JSON data from file
+        string jsonContent = File.ReadAllText(jsonFilePath);
+
+        // Deserialize JSON into a list of ScriptureData objects
+        return JsonSerializer.Deserialize<List<ScriptureData>>(jsonContent);
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Text.Json;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string jsonFilePath = args.Length > 0 ? args[0] : "scriptures.json";
+        List<ScriptureData> scripturesData = LoadScripturesData(jsonFilePath);
+
+        Random random = new Random();
+        ScriptureData randomScriptureData = ChooseRandomScripture(scripturesData, random);
+
+        Reference reference = new Reference(randomScriptureData.BookName, randomScriptureData.ChapterNumber, randomScriptureData.StartVerse, randomScriptureData.EndVerse);
+        Scripture scripture = new Scripture(reference, randomScriptureData.Text);
+
+        DisplayWelcomeBanner();
+
+        bool play = true;
+
+        do
+        {
+            Console.Clear();
+            scripture.GetDisplayText();
+            string userInput = Console.ReadLine().ToLower();
+
+            if (userInput == "quit")
+            {
+                play = false;
+            }
+            else
+            {
+                Console.Clear();
+                scripture.HideRandomWords(1);
+                scripture.GetDisplayText();
+
+                if (scripture.IsCompletelyHidden())
+                {
+                    return;
+                }
+            }
+
+        } while (play);
+
+        Console.WriteLine();
+        Console.WriteLine("Have a great day.");
+    }
+
+    static void DisplayWelcomeBanner()
+    {
+        Console.WriteLine("Welcome to the scripture memorizer. Press ENTER twice to continue or enter 'quit' to stop.");
+    }
+
+    static ScriptureData ChooseRandomScripture(List<ScriptureData> scripturesData, Random random)
+    {
+        return scripturesData[random.Next(scripturesData.Count)];
+    }
+
+    static List<ScriptureData> LoadScripturesData(string jsonFilePath)
+    {
+        try
+        {
+            string jsonContent = File.ReadAllText(jsonFilePath);
+            return JsonSerializer.Deserialize<List<ScriptureData>>(jsonContent);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading scriptures data: {ex.Message}");
+            return new List<ScriptureData>();
+        }
+    }
+}
