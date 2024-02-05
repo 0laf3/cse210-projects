@@ -1,4 +1,8 @@
 // Added logic to ensure that no prompt or question is ever repeated before exhausting the available list.
+//I added a Statistics class to keep track of activity counts using a dictionary.
+//Modified the ExecuteUserChoice method to increment the count for the chosen activity.
+//Added a DisplayStatistics method to show the statistics at the end of the program
+//Added an option 5 in the menu to display the statistics at any time.
 
 using System;
 using System.Collections.Generic;
@@ -36,6 +40,7 @@ class Program
         Console.WriteLine("2. Start Reflecting Activity");
         Console.WriteLine("3. Start Listing Activity");
         Console.WriteLine("4. Quit");
+        Console.WriteLine("5. Display Statistics");
         Console.Write("Choose an option from the menu: ");
     }
 
@@ -45,23 +50,28 @@ class Program
         {
             case 1:
                 RunActivity(new BreathingActivity());
+                Statistics.IncrementActivityCount("Breathing Activity");
                 break;
             case 2:
                 RunActivity(new ReflectingActivity());
+                Statistics.IncrementActivityCount("Reflecting Activity");
                 break;
             case 3:
                 RunActivity(new ListingActivity());
+                Statistics.IncrementActivityCount("Listing Activity");
                 break;
             case 4:
                 Console.WriteLine("Goodbye");
                 return false;
+            case 5:
+                Statistics.DisplayStatistics();
+                break;
             default:
                 Console.WriteLine("Invalid choice. Please choose a valid option.");
                 break;
         }
         return true;
     }
-
     static void RunActivity(IActivity activity)
     {
         activity.Run();
