@@ -16,7 +16,7 @@ public abstract class Activity : IActivity
     public void DisplayStartingMessage()
     {
         Console.Clear();
-        Console.Write($"Starting the {_name}. {_description}.\nPlease set the duration (seconds): ");
+        Console.Write($"Starting the {_name}. {_description}.\nHow long in seconds, would you like for your session? ");
 
         if (int.TryParse(Console.ReadLine(), out int duration) && duration > 0)
         {
@@ -36,7 +36,7 @@ public abstract class Activity : IActivity
     {
         Console.WriteLine("Great job!");
         ShowSpinner(3);
-        Console.WriteLine($"You've completed the {_name}. Which ran for {_duration} seconds");
+        Console.WriteLine($"You've completed the {_name}. Which run for {_duration} seconds");
         ShowSpinner(5);
         Console.Clear();
     }
