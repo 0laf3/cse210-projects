@@ -1,4 +1,4 @@
-// Concrete class representing a bond, inheriting from FinancialInstrument
+//representing a bond, inheriting from FinancialInstrument
 public class Bond : FinancialInstrument
 {
     public DateTime MaturityDate { get; set; }

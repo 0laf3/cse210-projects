@@ -1,4 +1,4 @@
-// Abstract class representing a generic financial instrument
+//representing a generic financial instrument
 public abstract class FinancialInstrument
 {
     public string Symbol { get; set; }
