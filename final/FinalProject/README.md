@@ -37,4 +37,4 @@ The Stock tracking Applications consists of the following components:
       - Instantiates an `AlphaVantageMarketDataProvider` as a market data provider.
       - Retrieves market data for three  Stock tracking Application (two stocks and one bond).
       - Creates a `Portfolio` and adds the retrieved instruments to it.
-      - Displays information about the instruments in the portfolio.
+      - Displays information about the Financial instruments in the portfolio.
