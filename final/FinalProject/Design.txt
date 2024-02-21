@@ -1,0 +1,50 @@
++-----------------------+        +-------------------------+
+|    FinancialInstrument |        |    IMarketDataProvider  |
++-----------------------+        +-------------------------+
+| -Symbol: string       |        | <<interface>>           |
+| -Price: decimal       |        | +GetMarketData(symbol)  |
+| +DisplayInfo(): void  |        +-------------------------+
++-----------------------+                 
+         /\                               
+         ||                               
++-----------------+                      
+|      Stock      |                      
++-----------------+                      
+| -SharesOwned: int|                     
+| +DisplayInfo()   |                     
++-----------------+                     
+                                        
+                                        
++-----------------+                     
+|      Bond       |                     
++-----------------+                     
+| -MaturityDate    |                    
+| +DisplayInfo()   |                    
++-----------------+                     
+                                        
++-----------------+                     
+|    Portfolio    |                     
++-----------------+                     
+| -holdings: List<|                     
+|   FinancialInstru|                     
+|   ment>          |                     
+| +AddToPortfolio()|                     
+| +DisplayPortfolio|                     
++-------------------                     
+                                        
+                                        
++-----------------+                     
+| AlphaVantageMar |                     
+| ketDataProvider |                     
++-----------------+                     
+| +GetMarketData()|                     
++-----------------+                     
+                                        
+                                        
++-----------------+                      
+|     Program     |                      
++-----------------+                      
+| +Main()          |                     
++-----------------+
+                                        
+                          
